@@ -1,0 +1,24 @@
+name: Seguimiento TREND+TECH
+
+on:
+  schedule:
+    - cron: '0 10 * * *'   # 10:00 UTC = 5:00 a. m. Bogotá
+  workflow_dispatch:        # botón "Run workflow" para probar a mano
+
+jobs:
+  seguimiento:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install gspread google-auth
+      - run: python seguimiento.py
+        env:
+          GCP_SA_JSON: ${{ secrets.GCP_SA_JSON }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
