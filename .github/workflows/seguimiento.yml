@@ -2,7 +2,7 @@ name: Seguimiento TREND+TECH
 
 on:
   schedule:
-    - cron: '0 10 * * *'   # 10:00 UTC = 5:00 a. m. Bogotá
+ 
   workflow_dispatch:        # botón "Run workflow" para probar a mano
 
 jobs:
